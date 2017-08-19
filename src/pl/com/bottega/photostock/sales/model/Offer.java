@@ -1,6 +1,7 @@
 package pl.com.bottega.photostock.sales.model;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 
@@ -22,5 +23,10 @@ public class Offer {
 
     public Money getTotalCost() {
         return null;
+    }
+
+    public Collection<Picture> getItems() {
+
+        return Collections.unmodifiableCollection(items);
     }
 }

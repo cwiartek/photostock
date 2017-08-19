@@ -17,7 +17,7 @@ public class Client {
     }
 
     public Client(String name, Adress adress) {
-        this(name, adress, ClientStatus.STANDARD, new Money(),new Money());
+        this(name, adress, ClientStatus.STANDARD, Money.ZERO, Money.ZERO);
 
     }
 

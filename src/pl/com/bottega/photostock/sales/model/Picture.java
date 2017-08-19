@@ -40,4 +40,19 @@ public class Picture {
     public void soldPer(Client client) {
 
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Picture picture = (Picture) o;
+
+        return number.equals(picture.number);
+    }
+
+    @Override
+    public int hashCode() {
+        return number.hashCode();
+    }
 }

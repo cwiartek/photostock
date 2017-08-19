@@ -2,18 +2,25 @@ package pl.com.bottega.photostock.sales.ui;
 
 import pl.com.bottega.photostock.sales.model.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import static pl.com.bottega.photostock.sales.model.ClientStatus.VIP;
+
 public class ConsoleApplication {
 
 
     public static void main(String[] args) {
+        Set<String> tags = new HashSet<>();
+        tags.add("Kotki");
 
-        Picture p1 = new Picture();
-        Picture p2 = new Picture();
-        Picture p3 = new Picture();
+        Picture p1 = new Picture(1L, tags, Money.valueOf(10));
+        Picture p2 = new Picture(2L, tags, Money.valueOf(5));
+        Picture p3 = new Picture(3L, tags, Money.valueOf(15));
 
-        Client client = new Client();
+        Client client = new Client("Jan Nowak" , new Adress( " ul. Polnocna 11", "Poland", "Lublin", "20-429" ));
 
-        Reservation reservation = new Reservation();
+        Reservation reservation = new Reservation(client);
 
         reservation.add(p1);
         reservation.add(p2);
@@ -34,7 +41,7 @@ public class ConsoleApplication {
         boolean canAfford = client.canAfford(offerTotalCost);
 
         if (canAfford) {
-            Purchase purchase = new Purchase();
+            Purchase purchase = new Purchase(client, offer.getItems());
             client.charge(offerTotalCost, String.format("Zakup %s", purchase));
             System.out.println(String.format("Ilosc zakupionych zdjec:  %d, calkowity koszt: %s" , offer.getItemsCount(),offerTotalCost));
 

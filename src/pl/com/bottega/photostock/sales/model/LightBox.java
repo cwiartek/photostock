@@ -16,9 +16,11 @@ public class LightBox {
 
 
     public void add ( Picture picture ){
+        items.add(picture);
 
     }
     public void remove ( Picture picture) {
+        items.remove(picture);
 
     }
 }
