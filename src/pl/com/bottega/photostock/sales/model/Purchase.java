@@ -14,5 +14,7 @@ public class Purchase {
         this.buyer = buyer;
         this. items = new LinkedList<>(items);
 
+
+
     }
 }

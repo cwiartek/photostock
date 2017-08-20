@@ -1,20 +1,25 @@
 package pl.com.bottega.photostock.sales.model;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Offer {
 
-    private Collection<Picture> items;
+    private List<Picture> items;
     private Client owner;
 
 
     public Offer ( Client owner, Collection<Picture> items) {
         this.owner = owner;
         this.items = new LinkedList<>(items);
+        this.items.sort(new Comparator<Picture>() {
+            @Override
+            public int compare(Picture o1, Picture o2) {
+                return o2.calculatePrice(owner).compareTo(o2.calculatePrice(owner));
+            }
+        });
+
     }
+
 
     public boolean sameAs(Offer offer, Money tollerance) {
         return  false;
@@ -23,7 +28,6 @@ public class Offer {
     public int getItemsCount() {
         return items.size();
     }
-
 
 
     public Money getTotalCost() {
