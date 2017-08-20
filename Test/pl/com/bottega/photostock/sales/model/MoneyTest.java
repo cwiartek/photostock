@@ -88,6 +88,16 @@ public class MoneyTest {
         FiftyCredit.compareTo(FiftyEur);
     }
 
+    @Test
+    public void shouldCalculatePercent() {
+
+        assertEquals(Money.valueOf(5), FiftyCredit.percent(10));
+        assertEquals(Money.valueOf(5.50), FiftyCredit.percent(11));
+        assertEquals(Money.valueOf(75),FiftyCredit.percent(150));
+        assertEquals(Money.valueOf(0.01),Money.valueOf(0.11).percent(10));
+        assertEquals(Money.valueOf(0.01),Money.valueOf(0.19).percent(10));
+    }
+
 
 
 }

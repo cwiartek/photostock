@@ -28,6 +28,10 @@ public class Money  implements Comparable<Money> {
         return new Money(value*100L, currency);
     }
 
+    public static Money valueOf ( double value) {
+        return new Money((long)(value * 100.0), DEFAULT_CURRENCY);
+    }
+
     public Money add(Money other) {
         checkCurrency(other);
 
@@ -92,5 +96,9 @@ public class Money  implements Comparable<Money> {
 
     public boolean gte(Money other) {
         return compareTo(other)>=0;
+    }
+
+    public Money percent(int percent) {
+        return new Money(cents*percent / 100, currency);
     }
 }

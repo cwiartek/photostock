@@ -27,6 +27,14 @@ public class Picture {
 
 
     public  Money calculatePrice(Client client) {
+        switch (client.getStatus()) {
+            case SILVER:
+                return price.percent(95);
+            case GOLD:
+                return price.percent(90);
+            case PLATINUM:
+                return price.percent(85);
+        }
         return price;
     }
 
@@ -76,7 +84,7 @@ public class Picture {
         return number.hashCode();
     }
 
-    public Object getNumber() {
+    public Long getNumber() {
         return number;
     }
 }
