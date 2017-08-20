@@ -20,16 +20,20 @@ public class ConsoleApplication {
 
         Client client = new Client("Jan Nowak" , new Adress( " ul. Polnocna 11", "Poland", "Lublin", "20-429" ));
 
+        client.recharge(Money.valueOf(1000000));
+
         Reservation reservation = new Reservation(client);
 
-        reservation.add(p1);
-        reservation.add(p2);
-        reservation.add(p3);
+        LightBox l = new LightBox(client, "Kotki");
+        l.add(p1);
+        l.add(p2);
+        l.add(p3);
+        LightBoxPresenter presenter = new LightBoxPresenter();
+        presenter.show(l);
 
         reservation.add(p1);
         reservation.add(p2);
         reservation.add(p3);
-
 
         System.out.println(String.format("W rezerwacji jest %d produktow", reservation.getItemsCount()));
 

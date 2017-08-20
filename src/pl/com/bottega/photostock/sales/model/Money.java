@@ -1,6 +1,6 @@
 package pl.com.bottega.photostock.sales.model;
 
-public class Money {
+public class Money  implements Comparable<Money> {
 
     public static final String DEFAULT_CURRENCY = "CREDIT";
 
@@ -70,5 +70,27 @@ public class Money {
         int result = cents.hashCode();
         result = 31 * result + currency.hashCode();
         return result;
+    }
+
+    @Override
+    public int compareTo(Money other) {
+        checkCurrency(other);
+        return (int) (cents - other.cents);
+    }
+
+    public boolean lt(Money other) {
+        return compareTo(other)<0;
+    }
+
+    public boolean lte(Money other) {
+        return compareTo(other) <=0;
+    }
+
+    public boolean gt(Money other) {
+        return compareTo(other) >0;
+    }
+
+    public boolean gte(Money other) {
+        return compareTo(other)>=0;
     }
 }
