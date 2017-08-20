@@ -24,6 +24,8 @@ public class Offer {
         return items.size();
     }
 
+
+
     public Money getTotalCost() {
 
         Money totalCost = Money.ZERO;
