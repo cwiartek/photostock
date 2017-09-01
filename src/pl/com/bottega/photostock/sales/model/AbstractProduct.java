@@ -1,30 +1,30 @@
 package pl.com.bottega.photostock.sales.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
-public class Picture extends AbstractProduct {
+public abstract class AbstractProduct implements Product {
 
     private Long number;
-    private Set<String> tags;
     private Money price;
     private Boolean active;
     private Client reservedBy, owner;
 
-
-    public Picture ( Long number, Set<String> tags, Money price) {
-        this(number,tags,price,true);
-
+    public AbstractProduct(Long number, Money price, Boolean active) {
+        this.number = number;
+        this.price = price;
+        this.active = active;
     }
 
-    public Picture ( Long number, Set<String> tags, Money price, Boolean acitve) {
-        super(number, price, acitve);
-        this.tags = new HashSet<>(tags);
-
+    @Override
+    public Long getNumber() {
+        return number;
     }
 
-/*
-    public  Money calculatePrice(Client client) {
+    @Override
+    public Boolean isAvailable() {
+        return active && reservedBy == null;
+    }
+
+    @Override
+    public Money calculatePrice(Client client) {
         switch (client.getStatus()) {
             case SILVER:
                 return price.percent(95);
@@ -36,13 +36,7 @@ public class Picture extends AbstractProduct {
         return price;
     }
 
-    public Boolean isAvailable() {
-
-        return active && reservedBy == null;
-    }
-
-
-
+    @Override
     public void reservedPer(Client client) {
         if (!isAvailable())
             throw new IllegalStateException("Product is not available");
@@ -50,7 +44,8 @@ public class Picture extends AbstractProduct {
 
     }
 
-    public void  unreservedPer(Client client) {
+    @Override
+    public void unreservedPer(Client client) {
         if (owner != null)
             throw new IllegalStateException("Product is already purchased");
         checkReservation(client, String.format("Product is not reserved by %s", client));
@@ -58,36 +53,32 @@ public class Picture extends AbstractProduct {
 
     }
 
+    @Override
     public void checkReservation(Client client, String format) {
         if (reservedBy == null || !reservedBy.equals(client))
             throw new IllegalStateException(format);
+
     }
 
+    @Override
     public void soldPer(Client client) {
         checkReservation(client, String.format("Product is  not reserved by %s", client));
 
         owner = client;
 
     }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Picture picture = (Picture) o;
+        AbstractProduct product = (AbstractProduct) o;
 
-        return number.equals(picture.number);
+        return number.equals(product.number);
     }
 
     @Override
     public int hashCode() {
         return number.hashCode();
     }
-
-    public Long getNumber() {
-        return number;
-    }
-
-    */
 }

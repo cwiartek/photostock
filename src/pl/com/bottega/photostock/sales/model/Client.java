@@ -1,20 +1,22 @@
 package pl.com.bottega.photostock.sales.model;
 
+import sun.reflect.generics.tree.Tree;
+
 import java.util.LinkedList;
 import java.util.List;
 
 public class Client {
 
     private String name;
-    private Adress adress;
+    private Address address;
     private ClientStatus status;
     private Money balance;
     private Money creditLimit;
     private List<Transaction> transactions = new LinkedList<>();
 
-    public Client(String name, Adress adress, ClientStatus status, Money balance, Money creditLimit) {
+    public Client(String name, Address address, ClientStatus status, Money balance, Money creditLimit) {
         this.name = name;
-        this.adress = adress;
+        this.address = address;
         this.status = status;
         this.balance = balance;
         this.creditLimit = creditLimit;
@@ -23,10 +25,11 @@ public class Client {
 
     }
 
-    public Client(String name, Adress adress) {
-        this(name, adress, ClientStatus.STANDARD, Money.ZERO, Money.ZERO);
+    public Client(String name, Address address) {
+        this(name, address, ClientStatus.STANDARD, Money.ZERO, Money.ZERO);
 
     }
+
 
     public boolean canAfford(Money amount) {
 
@@ -38,6 +41,7 @@ public class Client {
             throw new IllegalStateException("Not enough balance");
         balance = balance.substract(amount);
         transactions.add(new Transaction(amount.neg(),reason));
+
 
     }
     public void recharge(Money amount) {
@@ -56,5 +60,15 @@ public class Client {
 
     public int discountPercent() {
         return status.discountPercent();
+    }
+
+
+    public Money balance() {
+
+        for (Transaction transaction : transactions) {
+            balance = balance.add(transaction.getAmount());
+
+        }
+        return balance;
     }
 }

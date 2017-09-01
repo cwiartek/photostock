@@ -8,9 +8,11 @@ import static pl.com.bottega.photostock.sales.model.ClientStatus.VIP;
 
 public class ClientTest {
 
-    private Client clientWithCredit = new Client("Jan Nowak" , new Adress( " ul. Polnocna 11", "Poland", "Lublin", "20-429" ), VIP, Money.valueOf(100), Money.valueOf(100));
+    private Address address = new Address("ul. Północna 11", "Poland", "Lublin", "20-001");
 
-    private Client clientWithoutMoney  = new Client("Jan Nowak" , new Adress( " ul. Polnocna 11", "Poland", "Lublin", "20-429" ));
+    private Client clientWithCredit = new Client("Jan Nowak" , address , VIP, Money.valueOf(100), Money.valueOf(100));
+
+    private Client clientWithoutMoney  = new Client("Jan Nowak" , address );
     @Test
     public void shouldCheckIfClientAfford() {
 

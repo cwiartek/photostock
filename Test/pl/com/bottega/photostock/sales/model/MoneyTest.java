@@ -19,24 +19,20 @@ public class MoneyTest {
 
 
         //when
-        Money m1Plusm2 = FiftyCredit.add(SeventyCredit);
+        Money sum = FiftyCredit.add(SeventyCredit);
 
         //then
         Money expected = Money.valueOf(120);
-        assertEquals(expected, m1Plusm2);
+        assertEquals(expected, sum);
 
     }
 
     @Test(expected = IllegalArgumentException.class )
     public void shouldAddNotMoneyAtDifferentCurrencies() {
 
-        //given
-        Money m1 = FiftyUSD; //Money.valueOf(50, "USD");
-        Money m2 = FiftyEur;// Money.valueOf(70, "EUR");
-
 
         //when
-        Money m1Plusm2 = FiftyUSD.add(FiftyEur);
+        FiftyEur.add(SeventyCredit);
 
     }
 
@@ -44,11 +40,11 @@ public class MoneyTest {
     public void shouldSubstractMoney() {
 
         //when
-        Money m1Substract2 = FiftyCredit.substract(SeventyCredit);
+        Money dif = FiftyCredit.substract(SeventyCredit);
 
         //then
         Money expected = Money.valueOf(-20);
-        assertEquals(expected, m1Substract2);
+        assertEquals(expected, dif);
 
     }
 

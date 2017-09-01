@@ -31,6 +31,9 @@ public class Money  implements Comparable<Money> {
     public static Money valueOf ( double value) {
         return new Money((long)(value * 100.0), DEFAULT_CURRENCY);
     }
+    public static Money valueOf ( double value, String currency) {
+        return new Money((long)(value * 100.0), currency);
+    }
 
     public Money add(Money other) {
         checkCurrency(other);
@@ -55,7 +58,7 @@ public class Money  implements Comparable<Money> {
 
 
     public String toString() {
-        return String.format("%d %d.%s",cents/100 , cents % 100, currency );
+        return String.format("%d.%d %s",cents/100 , cents % 100, currency );
     }
 
     @Override
@@ -100,5 +103,17 @@ public class Money  implements Comparable<Money> {
 
     public Money percent(int percent) {
         return new Money(cents*percent / 100, currency);
+    }
+
+    public String currency() {
+        return currency;
+    }
+
+    public Money convert( String targetCurrency, Double exRate) {
+        return Money.valueOf(exRate*cents/100 , targetCurrency);
+    }
+
+    public Long getCents() {
+        return cents;
     }
 }

@@ -9,7 +9,7 @@ public class LightBox {
 
     private String name;
     private Client owner;
-    private List<Picture> items = new LinkedList<>();
+    private List<Product> items = new LinkedList<>();
 
     public LightBox(Client owner, String name) {
         this.name = name;
@@ -17,16 +17,16 @@ public class LightBox {
     }
 
 
-    public void add ( Picture picture ){
-        if (items.contains(picture))
+    public void add ( Product product ){
+        if (items.contains(product))
             throw new IllegalStateException("Already contains");
-        if ( !picture.isAvailable())
+        if ( !product.isAvailable())
             throw new IllegalArgumentException("Picture is not available");
-        items.add(picture);
+        items.add(product);
 
     }
-    public void remove ( Picture picture) {
-        if (!items.remove(picture))
+    public void remove ( Product product) {
+        if (!items.remove(product))
             throw new IllegalArgumentException("Does not contain");
 
 
@@ -40,7 +40,7 @@ public class LightBox {
         return owner;
     }
 
-    public Collection<Picture> getItems() {
+    public Collection<Product> getItems() {
         return Collections.unmodifiableList(items);
 
     }

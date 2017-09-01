@@ -3,6 +3,7 @@ package pl.com.bottega.photostock.sales.ui;
 import pl.com.bottega.photostock.sales.model.Client;
 import pl.com.bottega.photostock.sales.model.LightBox;
 import pl.com.bottega.photostock.sales.model.Picture;
+import pl.com.bottega.photostock.sales.model.Product;
 
 public class LightBoxPresenter {
 
@@ -12,11 +13,11 @@ public class LightBoxPresenter {
         System.out.println("----------------------------");
         int i = 1;
         Client client = lightBox.getOwner();
-        for (Picture picture : lightBox.getItems())
+        for (Product product : lightBox.getItems())
             System.out.println(String.format("%s %d. | %d | %s" ,
-                    picture.isAvailable() ? "" : "x",
+                    product.isAvailable() ? "" : "x",
                     i++ ,
-                    picture.getNumber(),
-                    picture.calculatePrice(client)));
+                    product.getNumber(),
+                    product.calculatePrice(client)));
     }
 }

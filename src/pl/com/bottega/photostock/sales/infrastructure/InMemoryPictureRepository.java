@@ -8,9 +8,10 @@ import java.util.*;
 
 public class InMemoryPictureRepository implements PictureRepository {
 
-    private static final Map<Long, Picture> REPO = new HashMap<>();
+    private static final Map<Long, Picture> REPO;
 
     static {
+        REPO = new HashMap<>();
         Set<String> tags = new HashSet<>();
         tags.add("Kotki");
         Picture p1 = new Picture(1L, tags, Money.valueOf(10));
@@ -25,7 +26,7 @@ public class InMemoryPictureRepository implements PictureRepository {
 
     @Override
     public Picture get(Long number) {
-        if(REPO.containsKey(number))
+        if(!REPO.containsKey(number))
             throw new IllegalArgumentException("No such object in repository");
         return REPO.get(number);
     }
