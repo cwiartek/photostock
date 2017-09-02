@@ -10,6 +10,11 @@ public interface Product {
     void checkReservation(Client client, String format);
     void soldPer(Client client);
 
+    default void ensureAvailable() {
+        if(!isAvailable())
+            throw new ProductNotAvailableException(this);
+    }
+
 
 
 }

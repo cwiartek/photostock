@@ -9,4 +9,10 @@ public class Clip extends AbstractProduct {
         this.lenght = lenght;
     }
 
+    public Clip(Long number, Long length, Money price) {
+
+        this(number, length, price, true);
+
+    }
+
 }

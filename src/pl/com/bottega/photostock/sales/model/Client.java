@@ -5,47 +5,38 @@ import sun.reflect.generics.tree.Tree;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Client {
+public abstract class Client {
 
     private String name;
     private Address address;
     private ClientStatus status;
-    private Money balance;
-    private Money creditLimit;
-    private List<Transaction> transactions = new LinkedList<>();
+    public List<Transaction> transactions = new LinkedList<>();
 
-    public Client(String name, Address address, ClientStatus status, Money balance, Money creditLimit) {
+    public Client(String name, Address address, ClientStatus status, Money balance) {
         this.name = name;
         this.address = address;
         this.status = status;
-        this.balance = balance;
-        this.creditLimit = creditLimit;
         if (balance.gt(Money.ZERO))
         transactions.add(new Transaction(balance,"First charge"));
 
     }
 
     public Client(String name, Address address) {
-        this(name, address, ClientStatus.STANDARD, Money.ZERO, Money.ZERO);
+        this(name, address, ClientStatus.STANDARD,Money.ZERO);
 
     }
 
 
-    public boolean canAfford(Money amount) {
+    public abstract boolean canAfford(Money amount);
 
-        return amount.lte(balance.add(creditLimit));
-    }
+
 
     public void charge(Money amount, String reason) {
         if (!canAfford(amount))
             throw new IllegalStateException("Not enough balance");
-        balance = balance.substract(amount);
-        transactions.add(new Transaction(amount.neg(),reason));
-
-
+          transactions.add(new Transaction(amount.neg(),reason));
     }
     public void recharge(Money amount) {
-        balance = balance.add(amount);
         transactions.add( new Transaction(amount, "Recharge account"));
 
     }
@@ -65,10 +56,14 @@ public class Client {
 
     public Money balance() {
 
-        for (Transaction transaction : transactions) {
-            balance = balance.add(transaction.getAmount());
+        Money sum = Money.ZERO;
 
-        }
-        return balance;
+        for(Transaction tx : transactions)
+
+            sum = sum.add(tx.getAmount());
+
+        return sum;
+
+
     }
 }

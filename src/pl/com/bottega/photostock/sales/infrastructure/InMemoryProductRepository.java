@@ -2,11 +2,11 @@ package pl.com.bottega.photostock.sales.infrastructure;
 
 import pl.com.bottega.photostock.sales.model.Money;
 import pl.com.bottega.photostock.sales.model.Picture;
-import pl.com.bottega.photostock.sales.model.PictureRepository;
+import pl.com.bottega.photostock.sales.model.ProductRepository;
 
 import java.util.*;
 
-public class InMemoryPictureRepository implements PictureRepository {
+public class InMemoryProductRepository implements ProductRepository {
 
     private static final Map<Long, Picture> REPO;
 

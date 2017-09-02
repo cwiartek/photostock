@@ -1,6 +1,6 @@
 package pl.com.bottega.photostock.sales.ui;
 
-import pl.com.bottega.photostock.sales.infrastructure.InMemoryPictureRepository;
+import pl.com.bottega.photostock.sales.infrastructure.InMemoryProductRepository;
 import pl.com.bottega.photostock.sales.model.*;
 
 import java.util.HashMap;
@@ -11,12 +11,12 @@ public class ConsoleApplication {
 
     public static void main(String[] args) {
 
-        PictureRepository repository = new InMemoryPictureRepository();
+        ProductRepository repository = new InMemoryProductRepository();
         Picture p1 = repository.get(1L);
         Picture p2 = repository.get(2L);
         Picture p3 = repository.get(3L);
 
-        Client client = new Client("Jan Nowak" , new Address( " ul. Polnocna 11", "Poland", "Lublin", "20-429" ));
+        Client client = new VIPClient("Jan Nowak" , new Address( " ul. Polnocna 11", "Poland", "Lublin", "20-429" ));
 
         client.recharge(Money.valueOf(1000000));
 

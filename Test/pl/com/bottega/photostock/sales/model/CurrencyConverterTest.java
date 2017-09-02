@@ -28,7 +28,7 @@ public class CurrencyConverterTest {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void ShouldThrowExpectionWhenRateIsNotDefined() {
+    public void ShouldThrowExceptionWhenRateIsNotDefined() {
         Map<String, Double> rates = new HashMap<>();
 
         rates.put("USD", 3.7020);

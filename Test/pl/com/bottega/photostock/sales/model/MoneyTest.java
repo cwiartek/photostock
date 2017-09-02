@@ -94,6 +94,14 @@ public class MoneyTest {
         assertEquals(Money.valueOf(0.01),Money.valueOf(0.19).percent(10));
     }
 
+    @Test
+
+    public void shouldConvertCurrencies() {
+
+        assertEquals(Money.valueOf(3.5, "PLN"), Money.valueOf(1, "USD").convert("PLN", 3.5));
+
+    }
+
 
 
 }

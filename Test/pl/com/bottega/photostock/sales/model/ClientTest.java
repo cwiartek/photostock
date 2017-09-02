@@ -10,9 +10,9 @@ public class ClientTest {
 
     private Address address = new Address("ul. Północna 11", "Poland", "Lublin", "20-001");
 
-    private Client clientWithCredit = new Client("Jan Nowak" , address , VIP, Money.valueOf(100), Money.valueOf(100));
+    private Client clientWithCredit = new VIPClient("Jan Nowak" , address , VIP, Money.valueOf(100), Money.valueOf(100));
 
-    private Client clientWithoutMoney  = new Client("Jan Nowak" , address );
+    private Client clientWithoutMoney  = new VIPClient("Jan Nowak" , address );
     @Test
     public void shouldCheckIfClientAfford() {
 

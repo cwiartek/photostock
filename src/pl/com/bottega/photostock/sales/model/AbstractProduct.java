@@ -38,8 +38,7 @@ public abstract class AbstractProduct implements Product {
 
     @Override
     public void reservedPer(Client client) {
-        if (!isAvailable())
-            throw new IllegalStateException("Product is not available");
+        ensureAvailable();
         reservedBy = client;
 
     }

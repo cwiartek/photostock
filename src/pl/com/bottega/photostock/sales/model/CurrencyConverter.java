@@ -7,7 +7,6 @@ public class CurrencyConverter {
 
     String mainCurrency;
     Map<String, Double> rates;
-    Double exchangeRate;
 
     public CurrencyConverter(String mainCurrency, Map<String, Double> rates) {
         this.mainCurrency = mainCurrency;
@@ -18,7 +17,6 @@ public class CurrencyConverter {
     public Money convert(Money amount) {
 
         Boolean c = rates.containsKey(amount.currency());
-       // exchangeRate = rates.get(amount.currency());
 
         if (amount.currency().equals(mainCurrency)) {
             return amount;
