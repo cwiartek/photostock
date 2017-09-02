@@ -1,14 +1,12 @@
 package pl.com.bottega.photostock.sales.infrastructure;
 
-import pl.com.bottega.photostock.sales.model.Money;
-import pl.com.bottega.photostock.sales.model.Picture;
-import pl.com.bottega.photostock.sales.model.ProductRepository;
+import pl.com.bottega.photostock.sales.model.*;
 
 import java.util.*;
 
 public class InMemoryProductRepository implements ProductRepository {
 
-    private static final Map<Long, Picture> REPO;
+    private static final Map<Long, Product> REPO;
 
     static {
         REPO = new HashMap<>();
@@ -25,14 +23,14 @@ public class InMemoryProductRepository implements ProductRepository {
     }
 
     @Override
-    public Picture get(Long number) {
+    public Product get(Long number) {
         if(!REPO.containsKey(number))
             throw new IllegalArgumentException("No such object in repository");
         return REPO.get(number);
     }
 
     @Override
-    public Optional<Picture> getOptional(Long number) {
+    public Optional<Product> getOptional(Long number) {
         if ( REPO.containsKey(number))
             return Optional.of(REPO.get(number));
         else
@@ -40,8 +38,14 @@ public class InMemoryProductRepository implements ProductRepository {
     }
 
     @Override
-    public void save(Picture picture) {
-        REPO.put(picture.getNumber(),picture);
+    public void save(Product product) {
+        REPO.put(product.getNumber(),product);
+
+    }
+
+    @Override
+    public List<Product> find(Client client,Set<String> tags, Money from, Money to) {
+        return null;
 
     }
 }

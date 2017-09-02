@@ -1,15 +1,21 @@
 package pl.com.bottega.photostock.sales.model;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public interface ProductRepository {
 
     // pobiera obiekt po identyfikatorze
-    Picture get(Long number);
+    Product get(Long number);
 
-    Optional<Picture> getOptional(Long number);
+    Optional<Product> getOptional(Long number);
 
 
     // zapis nowego lub aktualizacja isteniejacego
-    void save(Picture picture);
+    void save(Product product);
+
+
+    List<Product> find(Client client,Set<String> tags, Money from, Money to);
+
 }

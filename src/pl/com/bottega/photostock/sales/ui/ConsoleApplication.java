@@ -12,9 +12,9 @@ public class ConsoleApplication {
     public static void main(String[] args) {
 
         ProductRepository repository = new InMemoryProductRepository();
-        Picture p1 = repository.get(1L);
-        Picture p2 = repository.get(2L);
-        Picture p3 = repository.get(3L);
+        Product p1 = repository.get(1L);
+        Product p2 = repository.get(2L);
+        Product p3 = repository.get(3L);
 
         Client client = new VIPClient("Jan Nowak" , new Address( " ul. Polnocna 11", "Poland", "Lublin", "20-429" ));
 

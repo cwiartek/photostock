@@ -4,6 +4,7 @@ import sun.reflect.generics.tree.Tree;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.UUID;
 
 public abstract class Client {
 
@@ -11,11 +12,13 @@ public abstract class Client {
     private Address address;
     private ClientStatus status;
     public List<Transaction> transactions = new LinkedList<>();
+    private String number;
 
     public Client(String name, Address address, ClientStatus status, Money balance) {
         this.name = name;
         this.address = address;
         this.status = status;
+        this.number = UUID.randomUUID().toString();
         if (balance.gt(Money.ZERO))
         transactions.add(new Transaction(balance,"First charge"));
 
@@ -65,5 +68,9 @@ public abstract class Client {
         return sum;
 
 
+    }
+
+    public String getNumber() {
+        return number;
     }
 }
