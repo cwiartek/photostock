@@ -70,6 +70,10 @@ public abstract class Client {
 
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String getNumber() {
         return number;
     }

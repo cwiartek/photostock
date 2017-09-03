@@ -1,11 +1,12 @@
 package pl.com.bottega.photostock.sales.application;
 
-import pl.com.bottega.photostock.sales.infrastructure.InMemoryClientRepository;
 import pl.com.bottega.photostock.sales.model.*;
+import pl.com.bottega.photostock.sales.model.Repositories.ClientRepository;
+import pl.com.bottega.photostock.sales.model.Repositories.ProductRepository;
+import pl.com.bottega.photostock.sales.model.Repositories.PurchaseRepository;
+import pl.com.bottega.photostock.sales.model.Repositories.ReservationRepository;
 
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 public class PurchaseProcess {
 

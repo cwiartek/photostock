@@ -1,31 +1,30 @@
 package pl.com.bottega.photostock.sales.model;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class LightBox {
 
     private String name;
     private Client owner;
-    private List<Product> items = new LinkedList<>();
+    private List<Picture> items = new LinkedList<>();
+    private String number;
 
     public LightBox(Client owner, String name) {
         this.name = name;
         this.owner = owner;
+        this.number = UUID.randomUUID().toString();
     }
 
 
-    public void add ( Product product ){
-        if (items.contains(product))
+    public void add ( Picture picture ){
+        if (items.contains(picture))
             throw new IllegalStateException("Already contains");
-        product.ensureAvailable();
-        items.add(product);
+        picture.ensureAvailable();
+        items.add(picture);
 
     }
-    public void remove ( Product product) {
-        if (!items.remove(product))
+    public void remove ( Picture picture) {
+        if (!items.remove(picture))
             throw new IllegalArgumentException("Does not contain");
 
 
@@ -39,10 +38,23 @@ public class LightBox {
         return owner;
     }
 
-    public Collection<Product> getItems() {
+    public Collection<Picture> getItems() {
         return Collections.unmodifiableList(items);
 
     }
 
 
+    public String getNumber() {
+        return number;
+    }
+
+
+    public List<Picture> getPicture(Set<Long> pictureNumbers) {
+        List<Picture> result = new LinkedList<>();
+        for( Picture pic : items)
+            if(pictureNumbers.contains(pic.getNumber()))
+                result.add(pic);
+        return result;
+
+    }
 }

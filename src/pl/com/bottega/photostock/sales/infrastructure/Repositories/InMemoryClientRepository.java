@@ -1,11 +1,11 @@
-package pl.com.bottega.photostock.sales.infrastructure;
+package pl.com.bottega.photostock.sales.infrastructure.Repositories;
 
 import pl.com.bottega.photostock.sales.model.*;
+import pl.com.bottega.photostock.sales.model.Repositories.ClientRepository;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
+import java.util.Optional;
 
 public class InMemoryClientRepository implements ClientRepository {
 
@@ -35,5 +35,16 @@ public class InMemoryClientRepository implements ClientRepository {
     public void save(Client client) {
         REPO.put(client.getNumber(),client);
 
+    }
+
+    @Override
+    public Optional<Client> getByLogin(String login) {
+
+        for ( Client client : REPO.values()) {
+            if ( client.getName().toLowerCase().equals(login.toLowerCase())){
+                return Optional.of(client);
+            }
+        }
+    return Optional.empty();
     }
 }

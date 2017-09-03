@@ -1,4 +1,8 @@
-package pl.com.bottega.photostock.sales.model;
+package pl.com.bottega.photostock.sales.model.Repositories;
+
+import pl.com.bottega.photostock.sales.model.Client;
+import pl.com.bottega.photostock.sales.model.Money;
+import pl.com.bottega.photostock.sales.model.Product;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +20,6 @@ public interface ProductRepository {
     void save(Product product);
 
 
-    List<Product> find(Client client,Set<String> tags, Money from, Money to);
+    List<Product> find(Client client, Set<String> tags, Money from, Money to);
 
 }

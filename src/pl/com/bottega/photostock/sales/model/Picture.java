@@ -19,8 +19,12 @@ public class Picture extends AbstractProduct {
 
     }
 
+    public boolean hasTags(Set<String> tags) {
+        return this.tags.containsAll(tags);
+    }
 
 
-
-
+    public Set<String> getTags() {
+        return tags;
+    }
 }
