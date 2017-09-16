@@ -9,27 +9,112 @@ import java.util.Scanner;
 
 public class LightBoxManagmentsScreen {
 
-    private LightboxManagment lightboxManagment;
     private Scanner scanner;
+    private LightboxManagment lightBoxManagement;
     private AuthenticationManager authenticationManager;
+    private List<LightBox> lightBoxes;
+    private LightBox lightBox;
+    private AddProductToLightboxScreen addProductToLightBoxScreen;
+    private PurchaseLightBoxScreen purchaseLightBoxScreen;
 
-    public LightBoxManagmentsScreen(Scanner scanner, LightboxManagment lightboxManagment, AuthenticationManager authenticationManager) {
-        this.lightboxManagment = lightboxManagment;
+    public LightBoxManagmentsScreen(Scanner scanner, LightboxManagment lightBoxManagement,
+
+                                    AuthenticationManager authenticationManager, AddProductToLightboxScreen addProductToLightBoxScreen,
+                                    PurchaseLightBoxScreen purchaseLightBoxScreen) {
+
         this.scanner = scanner;
+        this.lightBoxManagement = lightBoxManagement;
         this.authenticationManager = authenticationManager;
+        this.addProductToLightBoxScreen = addProductToLightBoxScreen;
+        this.purchaseLightBoxScreen = purchaseLightBoxScreen;
     }
 
     public void show() {
 
-        System.out.println("Twoje lightBoxy");
-        List<LightBox> lightBoxes = lightboxManagment.getLightBoxes(authenticationManager.getClientNumber());
-        if ( lightBoxes.isEmpty())
-            System.out.println("Nie masz aktualnie zadnych lightBoxow");
+        System.out.println("Twoje lajt boksy:");
+        lightBoxes = lightBoxManagement.getLightBoxes(authenticationManager.getClientNumber());
+        if (lightBoxes.isEmpty())
+            System.out.println("Nie masz aktualnie żadnych lajt boksów");
         else {
-            int index =1;
+            int index = 1;
             for (LightBox lightBox : lightBoxes)
-                System.out.println(String.format("%d %s" , index++ , lightBox.getName()));
-
+                System.out.println(String.format("%d. %s", index++, lightBox.getName()));
         }
+        lightBoxActions();
+    }
+
+    private void lightBoxActions() {
+        while (true) {
+            showMenu();
+            int decission = scanner.nextInt();
+            scanner.nextLine();
+            switch (decission) {
+                case 1:
+                    addNewLightBox();
+                    break;
+                case 2:
+                    if(lightBoxes.size() > 0) {
+                        showLightBox();
+                    }
+                    break;
+                case 3:
+                    return;
+                default:
+                    System.out.println("Sorry, ale nie rozumiem.");
+            }
+        }
+    }
+
+    private void showLightBox() {
+        System.out.println("Podaj index Lightbox'a: ");
+        int index = scanner.nextInt();
+        scanner.nextLine();
+        lightBox = lightBoxes.get(index - 1);
+        LightBoxPresenter presenter = new LightBoxPresenter();
+        presenter.show(lightBox);
+        selectedLightBoxActions();
+    }
+
+    private void selectedLightBoxActions() {
+        while (true) {
+            showLightBoxMenu();
+            int decission = scanner.nextInt();
+            scanner.nextLine();
+            switch (decission) {
+                case 1:
+                    addProductToLightBoxScreen.show(lightBox);
+                    break;
+                case 2:
+                    purchaseLightBoxScreen.show(lightBox);
+                case 3:
+                    return;
+                default:
+                    System.out.println("Sorry, ale nie rozumiem.");
+            }
+        }
+    }
+
+    private void showLightBoxMenu() {
+        System.out.println("1. Dodaj produkt do LightBox'a");
+        System.out.println("2. Zakup produkty z Lightboxa");
+        System.out.println("3. Wróć do poprzedniego menu.");
+        System.out.println("Co chcesz zrobić?");
+    }
+
+    private void addNewLightBox() {
+        System.out.println("Podaj nazwę nowego LighBox'a: ");
+        String name = scanner.nextLine();
+        String clientNumber = authenticationManager.getClientNumber();
+        lightBoxManagement.createLightbox(clientNumber, name);
+        lightBoxes = lightBoxManagement.getLightBoxes(clientNumber);
+        System.out.println(String.format("LightBox %s został dodany.", name));
+    }
+
+    private void showMenu() {
+        System.out.println("1. Dodaj nowy LightBox.");
+        if (lightBoxes.size() > 0)
+            System.out.println("2. Wyświetl LightBox.");
+        System.out.println("3. Wróć do menu.");
+        System.out.println("Co chcesz zrobić?");
     }
 }

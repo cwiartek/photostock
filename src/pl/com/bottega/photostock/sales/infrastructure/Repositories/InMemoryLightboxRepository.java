@@ -1,17 +1,17 @@
 package pl.com.bottega.photostock.sales.infrastructure.Repositories;
 
+import pl.com.bottega.photostock.sales.model.Address;
+import pl.com.bottega.photostock.sales.model.Client;
 import pl.com.bottega.photostock.sales.model.LightBox;
+import pl.com.bottega.photostock.sales.model.Repositories.ClientRepository;
 import pl.com.bottega.photostock.sales.model.Repositories.LightboxRepository;
+import pl.com.bottega.photostock.sales.model.VIPClient;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class InMemoryLightboxRepository implements LightboxRepository {
 
     private static final Map<String, LightBox> REPO = new HashMap<>();
-
 
 
     @Override
@@ -34,5 +34,5 @@ public class InMemoryLightboxRepository implements LightboxRepository {
             if(lightBox.getOwner().getNumber().equals(clientNumber))
                 lboxys.add(lightBox);
         return lboxys;
-    }
+   }
 }

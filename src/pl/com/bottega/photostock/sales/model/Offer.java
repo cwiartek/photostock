@@ -13,18 +13,14 @@ public class Offer {
     public Offer ( Client owner, Collection<Product> items) {
         this.owner = owner;
         this.items = new LinkedList<>(items);
-        this.items.sort(new Comparator<Product>() {
-            @Override
-            public int compare(Product o1, Product o2) {
-                return o2.calculatePrice(owner).compareTo(o2.calculatePrice(owner));
-            }
-        });
+        this.items.sort((o1, o2) -> o2.calculatePrice(owner).compareTo(o2.calculatePrice(owner)));
 
     }
 
 
-    public boolean sameAs(Offer offer, Money tollerance) {
-        return  false;
+    public boolean sameAs(Offer offer, Money tollerance)
+    {
+        return getTotalCost().substract(offer.getTotalCost()).abs().lte(tollerance);
     }
 
     public int getItemsCount() {

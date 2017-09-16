@@ -13,7 +13,7 @@ public class InMemoryClientRepository implements ClientRepository {
 
     static {
         REPO = new HashMap<>();
-        Client c1 = new VIPClient("Jan Nowak" , new Address( " ul. Polnocna 11", "Poland", "Lublin", "20-429"));
+        Client c1 = new VIPClient("Jan Nowak" , new Address( " ul. Polnocna 11", "Poland", "Lublin", "20-429"),ClientStatus.VIP,Money.valueOf(200),Money.valueOf(200));
         Client c2 = new VIPClient("Jan Nowak2" , new Address( " ul. Polnocna 10", "Poland", "Lublin", "20-429"));
         Client c3 = new VIPClient("Jan Nowak3" , new Address( " ul. Polnocna 11", "Poland", "Lublin", "20-429"));
 
