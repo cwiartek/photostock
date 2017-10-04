@@ -4,6 +4,7 @@ import pl.com.bottega.photostock.sales.application.LightboxManagment;
 import pl.com.bottega.photostock.sales.application.ProductCatalog;
 import pl.com.bottega.photostock.sales.model.LightBox;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -44,25 +45,12 @@ public class LightBoxManagmentsScreen {
     }
 
     private void lightBoxActions() {
-        while (true) {
-            showMenu();
-            int decission = scanner.nextInt();
-            scanner.nextLine();
-            switch (decission) {
-                case 1:
-                    addNewLightBox();
-                    break;
-                case 2:
-                    if(lightBoxes.size() > 0) {
-                        showLightBox();
-                    }
-                    break;
-                case 3:
-                    return;
-                default:
-                    System.out.println("Sorry, ale nie rozumiem.");
-            }
-        }
+
+        Menu menu = new Menu(scanner);
+        menu.addItem("Dodaj nowy Light Box", () -> addNewLightBox());
+        if (lightBoxes.size() >0) { menu.addItem("Wyświetl LightBox", () -> showLightBox());}
+        menu.setLastItemLabel("Wroc do poprzedniego menu");
+        menu.show();
     }
 
     private void showLightBox() {
@@ -76,29 +64,19 @@ public class LightBoxManagmentsScreen {
     }
 
     private void selectedLightBoxActions() {
-        while (true) {
-            showLightBoxMenu();
-            int decission = scanner.nextInt();
-            scanner.nextLine();
-            switch (decission) {
-                case 1:
-                    addProductToLightBoxScreen.show(lightBox);
-                    break;
-                case 2:
-                    purchaseLightBoxScreen.show(lightBox);
-                case 3:
-                    return;
-                default:
-                    System.out.println("Sorry, ale nie rozumiem.");
-            }
-        }
-    }
 
-    private void showLightBoxMenu() {
-        System.out.println("1. Dodaj produkt do LightBox'a");
-        System.out.println("2. Zakup produkty z Lightboxa");
-        System.out.println("3. Wróć do poprzedniego menu.");
-        System.out.println("Co chcesz zrobić?");
+        Menu menu = new Menu(scanner);
+        menu.addItem("Dodaj produkt do Light Boxa", () -> addProductToLightBoxScreen.show(lightBox));
+        menu.addItem("Zakup produkty z Light Boxa", () -> {
+            try {
+                 purchaseLightBoxScreen.show(lightBox);
+            }
+            catch (IOException e) {
+                System.out.println("Nie znaleziono pliku");
+                }
+                });
+        menu.setLastItemLabel("Wroc do poprzedniego menu");
+        menu.show();
     }
 
     private void addNewLightBox() {
@@ -110,11 +88,5 @@ public class LightBoxManagmentsScreen {
         System.out.println(String.format("LightBox %s został dodany.", name));
     }
 
-    private void showMenu() {
-        System.out.println("1. Dodaj nowy LightBox.");
-        if (lightBoxes.size() > 0)
-            System.out.println("2. Wyświetl LightBox.");
-        System.out.println("3. Wróć do menu.");
-        System.out.println("Co chcesz zrobić?");
-    }
+
 }

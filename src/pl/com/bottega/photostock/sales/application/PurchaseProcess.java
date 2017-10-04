@@ -6,6 +6,7 @@ import pl.com.bottega.photostock.sales.model.Repositories.ProductRepository;
 import pl.com.bottega.photostock.sales.model.Repositories.PurchaseRepository;
 import pl.com.bottega.photostock.sales.model.Repositories.ReservationRepository;
 
+import java.io.IOException;
 import java.util.Collection;
 
 public class PurchaseProcess {
@@ -31,7 +32,7 @@ public class PurchaseProcess {
         return reservation.getNumber();
     }
 
-    public void add(String reservationNumber, Long productNumber) {
+    public void add(String reservationNumber, Long productNumber) throws IOException {
         Reservation reservation = reservationRepository.get(reservationNumber);
         Product product = productRepository.get(productNumber);
         reservation.add(product);
@@ -46,7 +47,7 @@ public class PurchaseProcess {
         return offer;
     }
 
-    public PurchaseStatus confirm(String reservationNumber, Offer clientOffer) {
+    public PurchaseStatus confirm(String reservationNumber, Offer clientOffer) throws IOException {
         Offer currentOffer = calculateOffer(reservationNumber);
         if (currentOffer.sameAs(clientOffer, TOLLERANCE)) {
             Client client = currentOffer.getOwner();

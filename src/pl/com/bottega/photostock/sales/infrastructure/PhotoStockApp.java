@@ -24,7 +24,9 @@ public class PhotoStockApp {
 
         LightboxRepository lightBoxRepository = new InMemoryLightboxRepository();
         ClientRepository clientRepository = new InMemoryClientRepository();
-        ProductRepository productRepository = new InMemoryProductRepository();
+        //ProductRepository productRepository = new InMemoryProductRepository();
+        String CSVProductRepository = "D:\\product.csv";
+        ProductRepository productRepository = new CSVProductRepository(CSVProductRepository,clientRepository);
         ReservationRepository reservationRepository = new InMemoryReservationRepository();
         PurchaseRepository purchaseRepository = new InMemoryPurchaseRepository();
         AuthenticationManager authenticationManager = new AuthenticationManager(clientRepository);

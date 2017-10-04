@@ -6,6 +6,7 @@ import pl.com.bottega.photostock.sales.model.Repositories.LightboxRepository;
 import pl.com.bottega.photostock.sales.model.Repositories.ProductRepository;
 import pl.com.bottega.photostock.sales.model.Repositories.ReservationRepository;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -49,7 +50,7 @@ public class LightboxManagment {
 
     }
 
-    public void reserve(String lightBoxNumber, Set<Long> pictureNumbers,  String reservationNumber) {
+    public void reserve(String lightBoxNumber, Set<Long> pictureNumbers,  String reservationNumber) throws IOException {
 
         LightBox lightBox = lightboxRepository.get(lightBoxNumber);
         Reservation reservation = reservationRepository.get(reservationNumber);

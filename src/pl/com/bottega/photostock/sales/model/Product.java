@@ -16,5 +16,9 @@ public interface Product {
     }
 
 
+    Money getPrice();
 
+    Client getReservedBy();
+
+    Client getOwner();
 }

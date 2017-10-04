@@ -76,15 +76,5 @@ public class InMemoryProductRepository implements ProductRepository {
 */
         }
 
-    private boolean matchesCriteria(Picture picture, Client client, Set<String> tags, Money from, Money to) {
-        if(tags != null && !picture.hasTags(tags))
-            return false;
-        Money price = picture.calculatePrice(client);
 
-        if(from != null && from.gt(price))
-            return false;
-        if (to != null && to.lt(price))
-            return false;
-        return true;
-    }
 }

@@ -3,13 +3,21 @@ package pl.com.bottega.photostock.sales.model;
 public abstract class AbstractProduct implements Product {
 
     private Long number;
-    private Money price;
+    protected Money price;
     private Boolean active;
     private Client reservedBy, owner;
 
     public AbstractProduct(Long number, Money price, Boolean active) {
         this.number = number;
         this.price = price;
+        this.active = active;
+    }
+
+    public AbstractProduct(Long number, Money price, Client reservedBy, Client owner, boolean active) {
+        this.number = number;
+        this.price = price;
+        this.reservedBy = reservedBy;
+        this.owner = owner;
         this.active = active;
     }
 
@@ -79,5 +87,14 @@ public abstract class AbstractProduct implements Product {
     @Override
     public int hashCode() {
         return number.hashCode();
+    }
+
+    public Client getReservedBy() {
+        return reservedBy;
+    }
+
+    @Override
+    public Client getOwner() {
+        return owner;
     }
 }

@@ -5,6 +5,7 @@ import pl.com.bottega.photostock.sales.model.Money;
 import pl.com.bottega.photostock.sales.model.Picture;
 import pl.com.bottega.photostock.sales.model.Product;
 
+import java.io.IOException;
 import java.util.*;
 
 public class SearchScreen {
@@ -20,7 +21,7 @@ public class SearchScreen {
         this.authenticationManager = authenticationManager;
     }
 
-    public void show() {
+    public void show() throws IOException {
         System.out.println("Podaj kryteria wyszukiwania");
         System.out.println("Tagi: ");
         Set<String> tags = getTags();
